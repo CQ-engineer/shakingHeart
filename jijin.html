@@ -82,12 +82,8 @@
         }
         total += Number(input1.value) * Number(input2.value)
       }
-      total = (total/100).toFixed(2);
-      if(total > 0 ){
-        totalP.innerHTML = `恭喜，你今天收益${total}元，再接再厉！`;
-      }else{
-        totalP.innerHTML = `你今天亏损${-1*total}元，不要灰心，明天继续肝！`
-      }
+      total = total/100;
+      rollNum(total);
     })
     function render (rowData) {
       let str = '';
@@ -112,6 +108,28 @@
           rowData[index].percent = value
         })
       })
+    }
+    function rollNum (total) {
+      const type = Math.sign(total)
+      const frequency = 10;
+      const time = 1000;
+      let num = 1;
+
+      let timer = setInterval(function(){
+        if(num > frequency){
+          clearInterval(timer)
+          return
+        }
+        if(total > 0 ){
+          totalP.innerHTML = `恭喜，你今天收益${fixed2(total / frequency * num)}元，再接再厉！`;
+        }else{
+          totalP.innerHTML = `你今天亏损${fixed2(-1 * total / frequency * num)}元，不要灰心，明天继续肝！`
+        }
+        num++;
+      },100)
+    }
+    function fixed2(num){
+      return num.toFixed(2)
     }
   </script>
 </html>

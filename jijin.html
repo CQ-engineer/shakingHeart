@@ -1,0 +1,117 @@
+<!--
+ * @Descripttion: 
+ * @version: 
+ * @Author: CQ
+ * @Date: 2020-12-25 15:03:53
+ * @LastEditors: CQ
+ * @LastEditTime: 2020-12-25 16:06:41
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!--[if (lte IE 10)]><script>window.location.href='http://support.dmeng.net/upgrade-your-browser.html?referrer='+encodeURIComponent(window.location.href);</script><![endif]-->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>基金收益计算</title>
+    <style>
+      * {margin: 0; padding: 0; box-sizing: border-box;}
+      body,#app{width: 100%; height: 100%;}
+      #app{padding: 100px;}
+      #total{font-size: 24px;}
+      .divItem{margin-bottom: 15px;}
+      input{height: 30px;padding-left: 10px;}
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" id="nums" placeholder="购买基金数量">
+      <div id="inputContent"></div>
+      <button id="addBut">增加</button>
+      <button id="calcBut">收益</button>
+      <p id="total"></p>
+    </div>
+  </body>
+  <script>
+    let rowData = [];
+    const numsInput = document.querySelector("#nums");
+    const inputContent = document.querySelector("#inputContent");
+    const addBut = document.querySelector("#addBut");
+    const calcBut = document.querySelector("#calcBut");
+    const totalP = document.querySelector("#total");
+    numsInput.addEventListener("input",function(event){
+      let value = event.target.value * 1;
+      if(value === rowData.length || value === 0){
+        return
+      }
+      if(value > rowData.length){
+        let value1 = value - rowData.length
+        while( value1 > 0){
+          value1--;
+          rowData.push({money:'', percent:''})
+        }
+      }else{
+        let value1 = rowData.length - value
+        while( value1 > 0){
+          value1--;
+          rowData.pop()
+        }
+      }
+      render(rowData)
+     
+    })
+    addBut.addEventListener("click",function(event){
+      rowData.push({money:'',percent:''})
+      numsInput.value = rowData.length
+      render(rowData)
+    })
+    calcBut.addEventListener("click",function(event){
+      let total = 0;
+      const divItem = inputContent.querySelectorAll('.divItem')
+
+      for(let i=0;i<divItem.length;i++){
+        const input1 = divItem[i].querySelectorAll('input')[0]
+        const input2 = divItem[i].querySelectorAll('input')[1]
+        if(isNaN(Number(input1.value))){
+          alert(`第${i+1}个金额有错误，不要瞎填`)
+          continue;
+        }
+        if(isNaN(Number(input2.value))){
+          alert(`第${i+1}个涨跌百分比有错误，不要瞎填`)
+          continue;
+        }
+        total += Number(input1.value) * Number(input2.value)
+      }
+      total = total/100;
+      if(total > 0 ){
+        totalP.innerHTML = `恭喜，你今天收益${total}元，再接再厉！`;
+      }else{
+        totalP.innerHTML = `你今天亏损${-1*total}元，不要灰心，明天继续肛！`
+      }
+    })
+    function render (rowData) {
+      let str = '';
+      rowData.forEach((item,index)=>{
+        str += `<div class="divItem">
+            <p>${index+1}</p> 
+            <input type="text" class="jine" placeholder="基金金额" value="${item.money}">-<input type="text" class="percent" placeholder="基金涨跌百分比" value="${item.percent}">
+          </div>`
+      })
+      inputContent.innerHTML = str
+      const jine = inputContent.querySelectorAll(".jine")
+      const percent = inputContent.querySelectorAll(".percent")
+      jine.forEach((item,index)=>{
+        item.addEventListener("input",function(event){
+          const value = event.target.value * 1
+          rowData[index].money = value
+        })
+      })
+      percent.forEach((item,index)=>{
+        item.addEventListener("input",function(event){
+          const value = event.target.value * 1
+          rowData[index].percent = value
+        })
+      })
+    }
+  </script>
+</html>

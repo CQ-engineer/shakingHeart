@@ -1,11 +1,11 @@
 $(document).ready(function() {
 
     $('.navigation').append('<area shape="poly" coords="224,82, 339,149, 339,279, 224,346, 109,279, 109,149" href="#close" alt="Jammy�s Folio ui designer &amp; developer" class="logo">')
-    $('.navigation').append('<area shape="poly" coords="147,-5, 219,40, 219,120, 147,160, 74,120, 74,40" href="#!/page_Home" alt="" class="nav1">')
+    $('.navigation').append('<area shape="poly" coords="147,-5, 219,40, 219,120, 147,160, 74,120, 74,40" href="https://cq-engineer.github.io/shakingHeart/love/" target="_blank" alt="" class="nav1">')
     $('.navigation').append('<area shape="poly" coords="73,129, 145,174, 145,254, 73,294, 0,254, 0,174" href="#!/page_About" alt="" class="nav2">')
-    $('.navigation').append('<area shape="poly" coords="147,261, 219,307, 219,387, 147,427, 74,387, 74,307" href="#!/page_Talk" alt="" class="nav3">')
+    $('.navigation').append('<area shape="poly" coords="147,261, 219,307, 219,387, 147,427, 74,387, 74,307" href="https://cq-engineer.github.io/shakingHeart/ramble/" target="_blank" alt="" class="nav3">')
     $('.navigation').append('<area shape="poly" coords="300,261, 372,307, 372,387, 300,427, 228,387, 228,307" href="#!/page_Message" alt="" class="nav4">')
-    $('.navigation').append('<area shape="poly" coords="379,129, 451,174, 451,254, 379,294, 306,254, 306,174" href="#!/page_Blog" alt="" class="nav5">')
+    $('.navigation').append('<area shape="poly" coords="379,129, 451,174, 451,254, 379,294, 306,254, 306,174" href="https://cq-engineer.github.io/shakingHeart/album/" target="_blank" alt="" class="nav5">')
     $('.navigation').append('<area shape="poly" coords="300,-5, 372,40, 372,120, 300,160, 228,120, 228,40" href="#!/page_Time" alt="" class="nav6">');
 
     $('.map_back').append('<area shape="poly" coords="73,-5, 145,40, 145,120, 73,160, 0,120, 0,40" href="#close" alt="" id="back">')
